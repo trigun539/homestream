@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/img/favicon.ico">
+
+    <title>HomeStream</title>
+
+    <!-- STYLES -->
+    <link href="/css/video-js.css" rel="stylesheet">
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/video.js"></script>
+    <script>
+      videojs.options.flash.swf = "/swf/video-js.swf"
+    </script>    
+  </head>
+
+  <body>
+
+    <video id="theVideo" class="video-js vjs-default-skin" controls preload="auto" width="385" height="264">
+     <source src="<%= videoURL %>" type='video/mp4' />
+     <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    </video>
+  
+    <script>
+      $(document).ready(function(){
+        // Adjusting video width
+        $('video').width($(window).width() - 15);
+      });
+    </script>
+  </body>
+</html>

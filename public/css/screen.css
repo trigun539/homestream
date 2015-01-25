@@ -1,0 +1,109 @@
+#mainContent {
+  margin-top: 60px;
+}
+
+a.videoLink {
+  height: 42px;
+}
+
+.videoWeb {
+  height: 42px; 
+  width: 42px; 
+  margin-top: -10px; 
+  margin-right: -15px;
+  padding-top: 10px;
+}
+
+#videoList li a.videoWeb {
+  -webkit-border-radius: 0 0px 0px 0;
+  border-radius: 0 0px 0px 0;
+}
+
+#videoList li:first-child a.videoWeb {
+  -webkit-border-radius: 0 4px 0px 0;
+  border-radius: 0 4px 0px 0;
+}
+
+#videoList li:last-child a.videoWeb {
+  -webkit-border-radius: 0 0px 4px 0;
+  border-radius: 0 0px 4px 0;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+.folderBtn {
+  width: 100%; 
+  text-align: left;
+}
+
+.folderBtn i {
+  margin-top: 5px;
+}
+
+.leftBtn {
+  text-align: left;
+}
+
+.rightBtn {
+  width: 42px;
+}
+
+.list-group .btn-group .btn {
+  border-top: 0px;
+  -webkit-border-radius: 0 0px 0px 0;
+  border-radius: 0 0px 0px 0;
+}
+
+.list-group .btn-group:first-child .btn {
+  border-top: 1px solid #CCC;
+  -webkit-border-radius: 0 0px 0px 0;
+  border-radius: 0 0px 0px 0;
+}
+
+.list-group .btn-group:first-child .folderBtn {
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-right-radius: 4px;
+}
+
+.list-group .btn-group:last-child .folderBtn {
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-left-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.list-group .btn-group:first-child .leftBtn {
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group .btn-group:last-child .leftBtn {
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group .btn-group:first-child .rightBtn {
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-right-radius: 4px;
+}
+
+.list-group .btn-group:last-child .rightBtn {
+  -webkit-border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+
+
+
