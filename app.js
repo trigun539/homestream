@@ -134,6 +134,6 @@ app.get('/*', function(req, res, next){
 /**
 *	Initializing Server
 */ 
-var server = app.listen(46005, function () {
-  console.log('App listening at http://localhost:46005');
+var server = app.listen(3000, function () {
+  console.log('App listening at http://localhost:3000');
 });
