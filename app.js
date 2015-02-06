@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 /**
 *	Routes
 */
-app.get('/', function (req, res) {
+app.get('/', function (req, res, next) {
   fs.readdir(__dirname + '/public/videos', function(err, files){
     if(err){
       next(err);
@@ -134,6 +134,6 @@ app.get('/*', function(req, res, next){
 /**
 *	Initializing Server
 */ 
-var server = app.listen(8006, function () {
-  console.log('App listening at http://localhost:8006');
+var server = app.listen(46005, function () {
+  console.log('App listening at http://localhost:46005');
 });
