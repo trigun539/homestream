@@ -1,5 +1,9 @@
 # HomeStream
 
+## Support
+
+The project only supports mp4 and mv4 video formats for now. More to come later.
+
 ## Installation
 
 *Ensure that you have latest NodeJS and Nginx versions installed*
