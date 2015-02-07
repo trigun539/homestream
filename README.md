@@ -17,7 +17,6 @@ To get the project up and running do the following:
 - sudo cp nginx.conf /etc/nginx/nginx.conf
 - sudo nginx -s stop
 - sudo nginx
-___
 
 ## Using HomeStream
 
