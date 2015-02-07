@@ -1,23 +1,21 @@
-Technologies used: Node, npm, bower, express, ejs, body-parser, jquery, (more coming)
+# HomeStream
 
--Install Node
+## Installation
 
--npm init
+*Ensure that you have latest NodeJS and Nginx versions installed*
 
--npm install express --save
+To get the project up and running do the following:
 
--npm install ejs --save
+- Clone the git project
+- npm install
+- bower install
+- node app.js
+- sudo cp nginx.conf /etc/nginx/nginx.conf
+- sudo nginx -s stop
+- sudo nginx
+___
 
--npm install body-parser --save
+## Using HomeStream
 
--bower init
-
--.bowerrc = { "directory": "bower_components"}
-
--bower install jquery, etc
-
--app.js
-
--views/index.js
-
--node app.js
+- Put your videos under *project_location*/public/videos
+- Navigate to localhost:46005
