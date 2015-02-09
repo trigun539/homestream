@@ -11,7 +11,8 @@ gulp.task('copyJS', function() {
       'bower_components/jquery/dist/jquery.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/bootstrap-growl/jquery.bootstrap-growl.js',
-      'bower_components/videojs/dist/video-js/video.js'
+      'bower_components/videojs/dist/video-js/video.js',
+      'bower_components/underscore/underscore.js'
     ])
     .pipe(gulp.dest('public/js/libs/'));
 });
