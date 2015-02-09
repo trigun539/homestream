@@ -1,18 +1,22 @@
 'use strict';
 
-var express = require('express'),
-app         = express(),
-bodyParser  = require('body-parser'),
-fs          = require('fs'),
-_           = require('underscore');
+var express     = require('express'),
+app             = express(),
+bodyParser      = require('body-parser'),
+fs              = require('fs'),
+_               = require('underscore'),
+method_override = require('method-override'),
+sqlite3         = require('sqlite3').verbose(),
+db              = new sqlite3.Database('homestream.db');
 
 /**
  * DB Stuff
  */
-var locations = [
-  { path: '/Users/eperez/homevideos', name: 'homevideos'},
-  { path: '/Users/eperez/Movies', name: 'Movies' }
-];
+
+
+db.serialize(function() {
+  db.run("CREATE TABLE if not exists locations (name TEXT PRIMARY KEY, path TEXT)");
+});
 
 /**
 *	Configuring Express
@@ -22,10 +26,18 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(method_override());
 
 // Setting locations
-_.each(locations, function(loc){
-  app.use(express.static(loc.path));
+db.all("SELECT * FROM locations", function(err, rows) {
+  if(err){
+    console.log(err);
+  }else{
+    var locations = [];
+    _.each(rows, function(row){
+      app.use(express.static(row.path));
+    });
+  }
 });
 
 /**
@@ -33,6 +45,10 @@ _.each(locations, function(loc){
 */
 app.get('/', function (req, res, next) {
   res.render('index.ejs');
+});
+
+app.get('/settings', function(req, res, next){
+  res.render('settings.ejs');
 });
 
 /**
@@ -55,6 +71,54 @@ function getFiles(path, callback){
   });
 }
 
+app.get('/api/locations', function(req, res, next){
+  db.all("SELECT * FROM locations", function(err, rows) {
+    if(err){
+      console.log(err);
+      next(err);
+    }else{
+      var locations = [];
+      _.each(rows, function(row){
+        locations.push(row.name);
+      });
+      res.send(locations);
+    }
+  });
+});
+
+app.post('/api/locations', function(req, res, next){
+  var location = req.body || null;
+
+  if('name' in location && 'path' in location){
+    var query = 'INSERT into locations(name,path) VALUES ("' + location.name + '", "' + String(location.path) + '")';
+    db.run(query, function(err){
+      if(err){
+        console.log(err);
+        next(err);
+      }else{
+        res.status(200).send();
+      }
+    });
+  }
+});
+
+app.delete('/api/locations/:location', function(req, res, next){
+  var name = req.params.location || null;
+  if(name){
+    var query = 'DELETE FROM locations WHERE name="' + name + '"';
+    db.run(query, function(err){
+      if(err){
+        console.log(err);
+        next(err);
+      }else{
+        res.status(200).send();
+      }
+    });
+  }else{
+    res.status(400).send('Location not found.');
+  }
+});
+
 app.get('/api/files', function(req, res, next){
   var path = req.query.path || null;
 
@@ -62,24 +126,38 @@ app.get('/api/files', function(req, res, next){
     var pathArr  = path.split('/'),
     locationName = pathArr.splice(0,1)[0];
 
-    _.each(locations, function(loc){
-      if(loc.name === locationName){
-        getFiles(loc.path + '/' + pathArr.join('/'), function(err, files){
-          if(err){
-            console.log(err);
-            next(err);
-          }else{
-            res.send(files);
+    db.all("SELECT * FROM locations", function(err, rows) {
+      if(err){
+        console.log(err);
+        next(err);
+      }else{
+        _.each(rows, function(loc){
+          if(loc.name === locationName){
+            getFiles(loc.path + '/' + pathArr.join('/'), function(err, files){
+              if(err){
+                console.log(err);
+                next(err);
+              }else{
+                res.send(files);
+              }
+            });
           }
         });
       }
     });
   }else{
-    var files = [];
-    _.each(locations, function(loc){
-      files.push(loc.name);
+    db.all("SELECT * FROM locations", function(err, rows) {
+      if(err){
+        console.log(err);
+        next(err);
+      }else{
+        var locations = [];
+        _.each(rows, function(row){
+          locations.push(row.name);
+        });
+        res.send(locations);
+      }
     });
-    res.send(files);
   }
 });
 
