@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  
   // Gets files for current path
   function getFiles(path, callback){
     url = '/api/files';
@@ -27,10 +26,11 @@ $(document).ready(function(){
 
   // Show file List
   function showList(files){
-    var html = '';
+    var html    = '',
+    currentPath = window.location.hash;
+
     _.each(files, function(file){
       if(/^.*\.(mp4|avi|flv|mp3|mkv)$/i.test(file)){
-        console.log(currentPath.indexOf('/'), currentPath);
         html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '" class="list-group-item video">';
         html += file;
         html += '</a>';
@@ -44,15 +44,21 @@ $(document).ready(function(){
     $('#fileList').html(html);
   }
 
-  // Current Selected path
-  var currentPath = '';
-
   /**
    * Events
    */
 
+  $(window).on('hashchange', function() {
+    var hash = window.location.hash.substring(1,window.location.hash.length);
+    // Get inner of that
+    getFiles(hash, function(files){
+      showList(files);
+    });
+  });
+
   $('#fileList').on('click', 'a.folder', function(e){
     e.preventDefault();
+    var currentPath = window.location.hash;
 
     if(currentPath.length !== 0){
       currentPath += '/' + encodeURIComponent($(e.currentTarget).text());
@@ -60,13 +66,10 @@ $(document).ready(function(){
       currentPath += encodeURIComponent($(e.currentTarget).text());
     }
 
-    // Get inner of that
-    getFiles(currentPath, function(files){
-      showList(files);
-    });
+    window.location.hash = currentPath;
   });
 
-  getFiles('', function(files){
+  getFiles(window.location.hash.substring(1,window.location.hash.length), function(files){
     showList(files);
   });
 });
