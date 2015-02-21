@@ -30,7 +30,7 @@ $(document).ready(function(){
     currentPath = window.location.hash;
 
     _.each(files, function(file){
-      if(/^.*\.(mp4|avi|flv|mp3|mkv)$/i.test(file)){
+      if(/^.*\.(mp4|m4v|avi|flv|mp3|mkv)$/i.test(file)){
         html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '" class="list-group-item video">';
         html += file;
         html += '</a>';
