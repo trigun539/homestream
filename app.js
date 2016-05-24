@@ -47,6 +47,10 @@ app.get('/', function (req, res, next) {
   res.render('index.ejs');
 });
 
+app.get('/video', function (req, res, next) {
+  res.render('video.ejs', {videoURL: req.query.videoURL});
+});
+
 app.get('/settings', function(req, res, next){
   res.render('settings.ejs');
 });

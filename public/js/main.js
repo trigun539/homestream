@@ -31,9 +31,18 @@ $(document).ready(function(){
 
     _.each(files, function(file){
       if(/^.*\.(mp4|avi|flv|mp3|mkv)$/i.test(file)){
-        html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '" class="list-group-item video">';
-        html += file;
+        html += '<li class="list-group-item">';
+        html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
+        html += '<i class="fa fa-play"></i>';
         html += '</a>';
+        html += '<a href="/video?videoURL='+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
+        html += '<i class="fa fa-globe"></i>';
+        html += '</a>';
+        html += file;
+        html += '</li>';
+        // html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '" class="list-group-item video">';
+        // html += file;
+        // html += '</a>';
       }else{
         html += '<a href="#" class="list-group-item folder">';
         html += file;
