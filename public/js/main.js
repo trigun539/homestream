@@ -30,7 +30,7 @@ $(document).ready(function(){
     currentPath = window.location.hash;
 
     _.each(files, function(file){
-      if(/^.*\.(mp4|avi|flv|mp3|mkv)$/i.test(file)){
+      if(/^.*\.(mp4|avi|flv|mp3|mkv|mv4)$/i.test(file)){
         html += '<li class="list-group-item">';
         html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
         html += '<i class="fa fa-play"></i>';
