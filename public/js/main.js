@@ -40,9 +40,6 @@ $(document).ready(function(){
         html += '</a>';
         html += file;
         html += '</li>';
-        // html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '" class="list-group-item video">';
-        // html += file;
-        // html += '</a>';
       }else{
         html += '<a href="#" class="list-group-item folder">';
         html += file;
