@@ -33,12 +33,12 @@ $(document).ready(function(){
       if(/^.*\.(mp4|avi|flv|mp3|mkv|mv4)$/i.test(file)){
         html += '<li class="list-group-item">';
         html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
-        html += '<i class="fa fa-play"></i>';
+        html += '<span class="badge"><i class="fa fa-play fa-3x"></i></span>';
         html += '</a>';
         html += '<a href="/video?videoURL='+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
-        html += '<i class="fa fa-globe"></i>';
+        html += '<span class="badge"><i class="fa fa-globe fa-3x"></i></span>';
         html += '</a>';
-        html += file;
+        html += '<span class="file-text">'+file+'</span>';
         html += '</li>';
       }else{
         html += '<a href="#" class="list-group-item folder">';
