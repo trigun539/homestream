@@ -111,37 +111,19 @@ a.videoLink {
 	border-bottom-right-radius: 4px;
 }
 
-#fileList li {
-	height: 60px;
-}
-
 #fileList li span.file-text {
+	display: inline-block;
 	font-size: 20px;
-	display: block;
-	width: 180px;
-	height: 30px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	float: left;
+	overflow-wrap: break-word;
 }
-
-@media (min-width: 600px) {
-	#fileList li span.file-text {
-		width: 400px;
-	}
-}
-
 
 #fileList li a span.badge {
+	display: inline-block;
 	margin-left: 20px;
 	background-color: #337ab7;
 	border-color: #2e6da4;
-	float: right;
 }
 
 #fileList > a {
 	font-size: 20px;
-	height: 60px;
-	text-overflow: ellipsis;
-	overflow: hidden;
 }
