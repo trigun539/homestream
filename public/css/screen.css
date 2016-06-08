@@ -113,6 +113,7 @@ a.videoLink {
 
 #fileList li span.file-text {
 	display: inline-block;
+	width: 100%;
 	font-size: 20px;
 	overflow-wrap: break-word;
 }
@@ -125,5 +126,8 @@ a.videoLink {
 }
 
 #fileList > a {
+	width: 100%;
+	display: inline-block;
+	overflow-wrap: break-word;
 	font-size: 20px;
 }

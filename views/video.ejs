@@ -29,8 +29,13 @@
     <script>
       $(document).ready(function(){
         // Adjusting video width
-        $('video').width($(window).width() - 40);
-        $('video').height($(window).height() - 40);
+        $('video').width($(window).width() - 100);
+        $('video').height($(window).height() - 100);
+
+				$(window).resize(function () {
+					$('video').width($(window).width() - 100);
+					$('video').height($(window).height() - 100);
+				});
       });
     </script>
   </body>
