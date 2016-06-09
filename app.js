@@ -51,6 +51,10 @@ app.get('/video', function (req, res, next) {
   res.render('video.ejs', {videoURL: req.query.videoURL});
 });
 
+app.get('/audio', function (req, res, next) {
+  res.render('audio.ejs', {audioURL: req.query.audioURL});
+});
+
 app.get('/settings', function(req, res, next){
   res.render('settings.ejs');
 });

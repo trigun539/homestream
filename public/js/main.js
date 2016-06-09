@@ -30,15 +30,31 @@ $(document).ready(function(){
     currentPath = window.location.hash;
 
     _.each(files, function(file){
+			var mp4 = '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
+			mp4 += '<span class="badge"><i class="fa fa-play fa-3x"></i></span>';
+			mp4 += '</a>';
+			
+			var video = '<a href="/video?videoURL='+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
+			video += '<span class="badge"><i class="fa fa-globe fa-3x"></i></span>';
+			video += '</a>';
+			
+			var mp3 = '<a href="/audio?audioURL='+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
+			mp3 += '<span class="badge"><i class="fa fa-headphones fa-3x"></i></span>';
+			mp3 += '</a>';
+			
       if(/^.*\.(mp4|avi|flv|mp3|mkv|mv4)$/i.test(file)){
         html += '<li class="list-group-item">';
         html += '<span class="file-text">'+file+'</span>';
-        html += '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
-        html += '<span class="badge"><i class="fa fa-play fa-3x"></i></span>';
-        html += '</a>';
-        html += '<a href="/video?videoURL='+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
-        html += '<span class="badge"><i class="fa fa-globe fa-3x"></i></span>';
-        html += '</a>';
+				
+				if(/^.*\.(mp4|mv4)$/i.test(file)){
+					html += mp4;
+					html += video;
+				}
+
+				if(/^.*\.(mp3)$/i.test(file)){
+					html += mp3;
+				}
+
         html += '</li>';
       }else{
         html += '<a href="#" class="list-group-item folder">';
