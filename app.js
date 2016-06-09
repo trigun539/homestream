@@ -5,6 +5,7 @@ app             = express(),
 bodyParser      = require('body-parser'),
 fs              = require('fs'),
 _               = require('underscore'),
+morgan          = require('morgan'),
 method_override = require('method-override'),
 sqlite3         = require('sqlite3').verbose(),
 db              = new sqlite3.Database('homestream.db');
@@ -27,6 +28,7 @@ app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(method_override());
+app.use(morgan('tiny'));
 
 // Setting locations
 db.all("SELECT * FROM locations", function(err, rows) {
