@@ -4,6 +4,8 @@
   "description": "Hello",
   "main": "app.js",
   "scripts": {
+    "watch": "webpack --watch",
+    "serve": "cd dist/ && serve -p 8080",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -24,8 +26,16 @@
     "method-override": "^2.3.1",
     "mongodb": "^1.4.23",
     "morgan": "^1.7.0",
+    "serve": "^5.1.2",
     "serve-favicon": "^2.2.0",
     "sqlite3": "^3.0.4",
-    "underscore": "^1.7.0"
+    "underscore": "^1.7.0",
+    "webpack": "^2.3.3"
+  },
+  "devDependencies": {
+    "font-awesome": "^4.7.0",
+    "html-webpack-plugin": "^2.28.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }

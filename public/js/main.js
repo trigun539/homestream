@@ -38,7 +38,7 @@ $(document).ready(function(){
 			video += '<span class="badge"><i class="fa fa-globe fa-3x"></i></span>';
 			video += '</a>';
 			
-			var mp3 = '<a href="/audio?audioURL='+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
+			var mp3 = '<a href="/audio?audioPath='+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
 			mp3 += '<span class="badge"><i class="fa fa-headphones fa-3x"></i></span>';
 			mp3 += '</a>';
 			

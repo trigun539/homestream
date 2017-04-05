@@ -171,6 +171,13 @@ app.get('/api/files', function(req, res, next){
   }
 });
 
+app.get('/api/audio', function (req, res) {
+		console.log('api audioURL', req.query.audioURL);
+		res.set({'Content-Type': 'audio/mpeg'});
+    var readStream = fs.createReadStream(req.query.audioURL);
+    readStream.pipe(res);
+});
+
 /**
 *	Initializing Server
 */ 
