@@ -1,0 +1,7 @@
+$blue: blue;
+
+:local {
+	.title {
+		color: $blue;
+	}
+}
