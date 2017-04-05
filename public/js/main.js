@@ -42,11 +42,11 @@ $(document).ready(function(){
 			mp3 += '<span class="badge"><i class="fa fa-headphones fa-3x"></i></span>';
 			mp3 += '</a>';
 			
-      if(/^.*\.(mp4|avi|flv|mp3|mkv|mv4)$/i.test(file)){
+      if(/^.*\.(mp4|avi|flv|mp3|mkv|m4v)$/i.test(file)){
         html += '<li class="list-group-item">';
         html += '<span class="file-text">'+file+'</span>';
 				
-				if(/^.*\.(mp4|mv4)$/i.test(file)){
+				if(/^.*\.(mp4|m4v)$/i.test(file)){
 					html += mp4;
 					html += video;
 				}
