@@ -24,7 +24,6 @@ db.locations = new Datastore({ filename: path.join(__dirname, 'locations.db'), a
 */
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
-app.use(express.static('C:\\Users\\706323\\Pictures\\tickets'));
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
