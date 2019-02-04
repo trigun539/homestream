@@ -36,7 +36,10 @@ db.locations.find({}, (err, rows) => {
   } else {
     var locations = [];
     _.each(rows, function(row){
-      app.use(`/${row.name}`, express.static(path.resolve(row.path)));
+      // Works on windows
+      // app.use(`/${row.name}`, express.static(path.resolve(row.path)));
+      // Works on linux
+      app.use(express.static(path.resolve(row.path)));
     });
   }
 });
