@@ -1,43 +1,43 @@
-'use strict';
-
 var express     = require('express'),
 app             = express(),
+path            = require('path'),
 bodyParser      = require('body-parser'),
 fs              = require('fs'),
 _               = require('underscore'),
 morgan          = require('morgan'),
 method_override = require('method-override'),
-sqlite3         = require('sqlite3').verbose(),
-db              = new sqlite3.Database('homestream.db');
+Datastore       = require('nedb');
+
+var PORT = process.env.PORT || 46005;
 
 /**
  * DB Stuff
  */
 
+var db = {};
 
-db.serialize(function() {
-  db.run("CREATE TABLE if not exists locations (name TEXT PRIMARY KEY, path TEXT)");
-});
+// Creating locations collection
+db.locations = new Datastore({ filename: path.join(__dirname, 'locations.db'), autoload: true });
 
 /**
 *	Configuring Express
 */
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+app.use(express.static('C:\\Users\\706323\\Pictures\\tickets'));
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(method_override());
 app.use(morgan('tiny'));
 
-// Setting locations
-db.all("SELECT * FROM locations", function(err, rows) {
-  if(err){
+db.locations.find({}, (err, rows) => {
+  if (err) {
     console.log(err);
-  }else{
+  } else {
     var locations = [];
     _.each(rows, function(row){
-      app.use(express.static(row.path));
+      app.use(`/${row.name}`, express.static(path.resolve(row.path)));
     });
   }
 });
@@ -50,7 +50,7 @@ app.get('/', function (req, res, next) {
 });
 
 app.get('/video', function (req, res, next) {
-  res.render('video.ejs', {videoURL: req.query.videoURL});
+  res.render('video.ejs', {videoURL: req.query.videoURL.replace('#', '')});
 });
 
 app.get('/audio', function (req, res, next) {
@@ -82,13 +82,14 @@ function getFiles(path, callback){
 }
 
 app.get('/api/locations', function(req, res, next){
-  db.all("SELECT * FROM locations", function(err, rows) {
+  db.locations.find({}, (err, docs) => {
     if(err){
       console.log(err);
       next(err);
     }else{
+      console.log('the locations: ', docs);
       var locations = [];
-      _.each(rows, function(row){
+      _.each(docs, function(row){
         locations.push(row.name);
       });
       res.send(locations);
@@ -100,8 +101,7 @@ app.post('/api/locations', function(req, res, next){
   var location = req.body || null;
 
   if('name' in location && 'path' in location){
-    var query = 'INSERT into locations(name,path) VALUES ("' + location.name + '", "' + String(location.path) + '")';
-    db.run(query, function(err){
+    db.locations.insert(location, (err, newDoc) => {
       if(err){
         console.log(err);
         next(err);
@@ -114,9 +114,8 @@ app.post('/api/locations', function(req, res, next){
 
 app.delete('/api/locations/:location', function(req, res, next){
   var name = req.params.location || null;
-  if(name){
-    var query = 'DELETE FROM locations WHERE name="' + name + '"';
-    db.run(query, function(err){
+  if(name) {
+    db.locations.remove({ name: name }, (err, numRemoved) => {
       if(err){
         console.log(err);
         next(err);
@@ -136,7 +135,7 @@ app.get('/api/files', function(req, res, next){
     var pathArr  = path.split('/'),
     locationName = pathArr.splice(0,1)[0];
 
-    db.all("SELECT * FROM locations", function(err, rows) {
+    db.locations.find({}, (err, rows) => {
       if(err){
         console.log(err);
         next(err);
@@ -156,7 +155,7 @@ app.get('/api/files', function(req, res, next){
       }
     });
   }else{
-    db.all("SELECT * FROM locations", function(err, rows) {
+    db.locations.find({}, (err, rows) => {
       if(err){
         console.log(err);
         next(err);
@@ -181,8 +180,8 @@ app.get('/api/audio', function (req, res) {
 /**
 *	Initializing Server
 */ 
-var server = app.listen(46005, function () {
-  console.log('App listening at http://localhost:46005');
+var server = app.listen(PORT, function () {
+  console.log(`App listening at http://localhost:${PORT}`);
 });
 
 module.exports = server;

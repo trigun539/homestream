@@ -25,9 +25,9 @@
     "gulp-uglify": "^1.0.2",
     "method-override": "^2.3.1",
     "morgan": "^1.7.0",
+    "nedb": "^1.8.0",
     "serve": "^5.1.2",
     "serve-favicon": "^2.2.0",
-    "sqlite3": "^3.0.4",
     "underscore": "^1.7.0",
     "webpack": "^2.3.3"
   },

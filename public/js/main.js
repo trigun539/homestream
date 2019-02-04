@@ -27,7 +27,7 @@ $(document).ready(function(){
   // Show file List
   function showList(files){
     var html    = '',
-    currentPath = window.location.hash;
+    currentPath = window.location.hash.replace('#', '');
 
     _.each(files, function(file){
 			var mp4 = '<a href="'+currentPath.substring(currentPath.indexOf('/'), currentPath.length)+ '/'+ encodeURIComponent(file) + '">';
